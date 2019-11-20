@@ -40,7 +40,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_permission",
             joinColumns = @JoinColumn(name = "user_id"),

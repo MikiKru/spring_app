@@ -2,7 +2,7 @@
 truncate user_permission;
 delete from user;
 delete from permission;
-# default permission
+-- default permission
 insert into permission
 values 	(1, "ROLE_USER"),
 (2, "ROLE_ADMIN");
