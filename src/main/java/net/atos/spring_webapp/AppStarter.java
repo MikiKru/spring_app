@@ -44,8 +44,12 @@ public class AppStarter implements CommandLineRunner {
         List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "registerDate"));
         printUsers(users);
     }
+    private void countUser(){
+        long usersLength = userRepository.count();
+        System.out.println("No. users: " + usersLength);
+    }
     @Override
     public void run(String... args) throws Exception {
-        getAllUsersSortedByEmail();
+        countUser();
     }
 }
