@@ -47,5 +47,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByEnable(boolean enable);
 
+    @Transactional
+    @Override
+    User save(User user);
+
+    @Transactional(rollbackFor = Exception.class)
+    void saveManyUsers(List<User> users);
 
 }

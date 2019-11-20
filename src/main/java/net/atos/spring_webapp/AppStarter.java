@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,9 +86,26 @@ public class AppStarter implements CommandLineRunner {
         return userRepository.getAllUsersWhereStatus(status);
     }
 
+    private void addManyUsers(List<User> users) throws Exception {
+        for (int i = 0; i < users.size() ; i++) {
+//            if(i == 5){
+//                throw new Exception();
+//            }
+            userRepository.save(users.get(i));
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        getUsersByStatus(true).forEach(user -> System.out.println(user.getEmail() + " status: " + user.getEnable()));
-        getUsersByStatusJPQL(false).forEach(user -> System.out.println(user.getEmail() + " status: " + user.getEnable()));
+        List<User> users = new ArrayList<User>(
+                Arrays.asList(
+                        new User("x1@x.pl","Xxxx111_"),
+                        new User("x2@x.pl","Xxxx111_"),
+                        new User("x3@x.pl","Xxxx111_"),
+                        new User("x4@x.pl","Xxxx111_"),
+                        new User("x5@x.pl","Xxxx111_"),
+                        new User("x6@x.pl","Xxxx111_")
+        ));
+        addManyUsers(users);
     }
 }
