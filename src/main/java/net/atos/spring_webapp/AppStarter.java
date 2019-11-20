@@ -76,9 +76,16 @@ public class AppStarter implements CommandLineRunner {
     private void deleteDisabledUsers(int userId){
         userRepository.deleteUserRoles(userId);
     }
+    private List<User> getUsersByStatus(boolean status){
+        return userRepository.findAllByEnable(status);
+    }
+    private List<User> getUsersByStatusJPQL(boolean status){
+        return userRepository.getAllUsersWhereStatus(status);
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        deleteDisabledUsers(3);
-        printUsers(userRepository.findAll());
+        getUsersByStatus(true).forEach(user -> System.out.println(user.getEmail() + " status: " + user.getEnable()));
+        getUsersByStatusJPQL(false).forEach(user -> System.out.println(user.getEmail() + " status: " + user.getEnable()));
     }
 }

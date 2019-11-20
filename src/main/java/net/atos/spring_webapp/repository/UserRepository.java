@@ -46,6 +46,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> getAllUsersWhereStatus(@Param("status") boolean status);
 
     List<User> findAllByEnable(boolean enable);
-    
+
 
 }
