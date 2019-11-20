@@ -13,4 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true)
     List<Object[]> aggregatePermissions();
 
+    @Query(
+            value = "select p.role_name, count(*) from user u join user_permission up on (u.user_id = up.user_id) join permission p on (p.permission_id = up.permission_id) group by p.role_name ORDER BY 2",
+            nativeQuery = true
+    )
+    List<Object[]> aggregatePermissionsByRoleName();
+
 }

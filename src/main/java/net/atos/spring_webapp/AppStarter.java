@@ -48,8 +48,18 @@ public class AppStarter implements CommandLineRunner {
         long usersLength = userRepository.count();
         System.out.println("No. users: " + usersLength);
     }
+    private void aggregatePermissions(){
+        userRepository.aggregatePermissions()
+                .forEach(objects -> System.out.println(
+                        "Permission: " + objects[0] + " count: " + objects[1]));
+    }
+    private void aggregatePermissionsByRoleName(){
+        userRepository.aggregatePermissionsByRoleName()
+                .forEach(objects -> System.out.println(
+                        "Permission: " + objects[0] + " count: " + objects[1]));
+    }
     @Override
     public void run(String... args) throws Exception {
-        countUser();
+        aggregatePermissionsByRoleName();
     }
 }
