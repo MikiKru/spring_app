@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AppStarter implements CommandLineRunner {
@@ -58,8 +59,26 @@ public class AppStarter implements CommandLineRunner {
                 .forEach(objects -> System.out.println(
                         "Permission: " + objects[0] + " count: " + objects[1]));
     }
+    // EDYCJA STATUSU V1
+    private void changeUserStatus(long userId, boolean status){
+        // SQL select * from user where user_id = ?
+        Optional<User> isUser = userRepository.findById(userId);
+        if(isUser.isPresent()){
+            User user = isUser.get();
+            // SQL update user set enable = 1
+            user.setEnable(status);
+            userRepository.save(user);
+        }
+    }
+    private void changeUserStatusNativeSQL(boolean status, int userId){
+        userRepository.updateUserStatus(status, userId);
+    }
+    private void deleteDisabledUsers(int userId){
+        userRepository.deleteUserRoles(userId);
+    }
     @Override
     public void run(String... args) throws Exception {
-        aggregatePermissionsByRoleName();
+        deleteDisabledUsers(3);
+        printUsers(userRepository.findAll());
     }
 }

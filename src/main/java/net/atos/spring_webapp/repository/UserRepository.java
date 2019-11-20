@@ -3,8 +3,12 @@ package net.atos.spring_webapp.repository;
 import net.atos.spring_webapp.model.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -18,5 +22,30 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true
     )
     List<Object[]> aggregatePermissionsByRoleName();
+
+    @Modifying
+    @Query(
+            value = "UPDATE user SET enable = :enable WHERE user_id = :user_id",
+            nativeQuery = true
+    )
+    @Transactional
+    void updateUserStatus(
+            @Param("enable") boolean enable, @Param("user_id") int userId
+    );
+
+    @Modifying
+    @Query(
+            value = "DELETE FROM user_permission WHERE user_id = ?",
+            nativeQuery = true
+    )
+    @Transactional
+    void deleteUserRoles(int userId);
+
+
+    @Query("SELECT u FROM User u WHERE u.enable = :status")
+    List<User> getAllUsersWhereStatus(@Param("status") boolean status);
+
+    List<User> findAllByEnable(boolean enable);
+    
 
 }

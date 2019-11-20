@@ -36,10 +36,11 @@ public class User {
     @Transient                                              // wykluczenie z mapowania
     private Character gender;
 
-    public User(String email, String password) {
+    public User(@Email @NotBlank String email, @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$") @Size(min = 6, max = 255) String password) {
         this.email = email;
         this.password = password;
     }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_permission",
