@@ -1,5 +1,6 @@
 package net.atos.spring_webapp.model;
 
+import net.atos.spring_webapp.model.enums.Category;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class Post {
     @Type(type = "text")
     private String content;
     private LocalDateTime addedDate = LocalDateTime.now();
+    @NotBlank
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,4 +30,10 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
+
+    public Post(@NotBlank String title, @NotBlank String content, @NotBlank Category category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+    }
 }
