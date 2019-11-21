@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>User</h1>
-    <p th:text="$user.getEmail()"></p>
-    <p th:text="$user.getPassword()"></p>
+    <p th:text="${user.getEmail()}"></p>
+    <p th:text="${user.getPassword()}"></p>
 <h1>All posts</h1>
 
     <div th:each="post : ${posts}">
