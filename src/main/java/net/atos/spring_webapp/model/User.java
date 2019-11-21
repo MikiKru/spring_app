@@ -36,6 +36,10 @@ public class User {
     @Transient                                              // wykluczenie z mapowania
     private Character gender;
 
+    public void addPermission(Permission permission){
+        this.roles.add(permission);
+    }
+
     public User(@Email @NotBlank String email, @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$") @Size(min = 6, max = 255) String password) {
         this.email = email;
         this.password = password;
