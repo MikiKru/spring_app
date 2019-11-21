@@ -1,5 +1,7 @@
 package net.atos.spring_webapp.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.atos.spring_webapp.model.enums.Category;
 import org.hibernate.annotations.Type;
 
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Post {
     @Id

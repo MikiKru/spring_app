@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+<body>
+<h1>User</h1>
+    <p th:text="$user.getEmail()"></p>
+    <p th:text="$user.getPassword()"></p>
+<h1>All posts</h1>
+
+    <div th:each="post : ${posts}">
+        <p th:text="${post.getTitle()}"></p>
+        <p th:text="${post.getAuthor().getEmail()}"></p>
+        <p th:text="${post.getAddedDate()}"></p>
+    </div>
+
+
+</body>
+</html>

@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class AppStarter implements CommandLineRunner {
     private UserRepository userRepository;
     private PostRepository postRepository;
@@ -88,18 +88,17 @@ public class AppStarter implements CommandLineRunner {
     }
 
     @Transactional(
-            rollbackFor = Exception.class,
-            noRollbackFor = {},
+            rollbackFor = {Exception.class},
             readOnly = false
     )
     public void addManyUsers(List<User> users) throws Exception {
-        for (int i = 0; i < users.size() ; i++) {
-            if(i == 5){
+        for (User user : users) {
+            userRepository.save(user);
+            if(user.getEmail().equals("x2@x.pl")){
                 System.out.println("ROLLBACK");
                 throw new Exception();
             }
             System.out.println("Próba zapisu...");
-            userRepository.save(users.get(i));
         }
     }
 

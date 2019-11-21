@@ -51,5 +51,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Override
     User save(User user);
 
+//    @Transactional(
+//            rollbackFor = Exception.class,
+//            noRollbackFor = {},
+//            readOnly = false
+//    )
+//
+//    void addManyUsers(List<User> users);
+
 
 }
