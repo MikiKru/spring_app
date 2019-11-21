@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,17 +87,24 @@ public class AppStarter implements CommandLineRunner {
         return userRepository.getAllUsersWhereStatus(status);
     }
 
-    private void addManyUsers(List<User> users) throws Exception {
+    @Transactional(
+            rollbackFor = Exception.class,
+            noRollbackFor = {},
+            readOnly = false
+    )
+    public void addManyUsers(List<User> users) throws Exception {
         for (int i = 0; i < users.size() ; i++) {
-//            if(i == 5){
-//                throw new Exception();
-//            }
+            if(i == 5){
+                System.out.println("ROLLBACK");
+                throw new Exception();
+            }
+            System.out.println("Próba zapisu...");
             userRepository.save(users.get(i));
         }
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
         List<User> users = new ArrayList<User>(
                 Arrays.asList(
                         new User("x1@x.pl","Xxxx111_"),
@@ -106,6 +114,10 @@ public class AppStarter implements CommandLineRunner {
                         new User("x5@x.pl","Xxxx111_"),
                         new User("x6@x.pl","Xxxx111_")
         ));
-        addManyUsers(users);
-    }
+        try {
+            addManyUsers(users);
+        }catch (Exception e){
+            System.out.println("Nic nie zapisano!");
+        }
+        }
 }
