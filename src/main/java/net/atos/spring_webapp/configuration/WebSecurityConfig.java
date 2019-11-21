@@ -16,8 +16,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/post&**").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
                 // pozostałe nie są autoryzowane
                 .anyRequest().permitAll()
-                .and().formLogin()
-                .and().httpBasic();
+                .and().csrf().disable()
+                .formLogin().loginPage("/login")    // adres formularza logowania
+                    .usernameParameter("email")     // nazwa th:name 1 parametru z formularza
+                    .passwordParameter("password")  // nazwa th:name 2 parametru z formularza
+                    .loginProcessingUrl("/login_process")   // zadres na jaki zostaną te parametry przekazane metodą POST
+                    .failureForwardUrl("/login_error")      // adres przekierowania po błędynym logowaniu
+                    .defaultSuccessUrl("/")                 // adres przekierowania po poprawnym logowaniu
+                .and()
+                    .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
 }

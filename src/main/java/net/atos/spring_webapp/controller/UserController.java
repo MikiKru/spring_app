@@ -32,5 +32,8 @@ public class UserController {
         userService.registerUser(user); // automatycznie przypisujemy w metodzie uprawnienia ROLE_USER
         return "redirect:/";
     }
-
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
