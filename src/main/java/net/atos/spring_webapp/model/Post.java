@@ -25,7 +25,7 @@ public class Post {
     @Type(type = "text")
     private String content;
     private LocalDateTime addedDate = LocalDateTime.now();
-    @NotBlank
+
     private Category category;
 
     @ManyToOne

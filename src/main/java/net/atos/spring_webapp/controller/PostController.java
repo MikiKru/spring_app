@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostController {
@@ -31,5 +36,18 @@ public class PostController {
     public String getPostById(@PathVariable("post_id") long postId, Model model){
         model.addAttribute("post",postService.getPostbyId(postId));
         return "post";
+    }
+    @PostMapping("/addpost")
+    public String addnewPost(
+            @ModelAttribute("newpost") @Valid Post newpost,
+            BindingResult bindingResult,
+            Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
+            model.addAttribute("categories", Category.values());
+            return "index";
+        }
+        postService.addNewPost(1, newpost);
+        return "redirect:/";
     }
 }
