@@ -53,14 +53,13 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Contact Me</h1>
-            <span class="subheading">Have questions? I have answers.</span>
+            <h1>Registration</h1>
           </div>
         </div>
       </div>
@@ -71,15 +70,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form th:action="@{/addpost}" th:method="post" th:object="${newpost}">
+        <form th:action="@{/register}" th:method="post" th:object="${user}">
           <div class="form-group">
-            <input class="form-control" th:type="text" th:field="*{title}" placeholder="input title">
-            <p th:errors="*{title}"></p>
-            <textarea class="form-control-plaintext" th:type="text" th:field="*{content}" placeholder="input content"></textarea>
-            <p th:errors="*{content}"></p>
-            <select class="form-control" th:field="*{category}">
-              <option th:each="c : ${categories}" th:text="${c}" th:value="${c}"></option>
-            </select>
+            <input class="form-control" th:type="text" th:field="*{email}" placeholder="input email">
+            <p th:errors="*{email}"></p>
+            <input class="form-control-plaintext" th:type="password" th:field="*{password}" placeholder="input content"></input>
+            <p th:errors="*{password}"></p>
             <input class="btn btn-primary mt-2 float-center" th:type="submit" th:value="add">
           </div>
         </form>
