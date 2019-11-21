@@ -74,7 +74,7 @@
           <div class="form-group">
             <input class="form-control" th:type="text" th:field="*{email}" placeholder="input email">
             <p th:errors="*{email}"></p>
-            <input class="form-control-plaintext" th:type="password" th:field="*{password}" placeholder="input content"></input>
+            <input class="form-control" th:type="password" th:field="*{password}" placeholder="input password">
             <p th:errors="*{password}"></p>
             <input class="btn btn-primary mt-2 float-center" th:type="submit" th:value="add">
           </div>
