@@ -25,8 +25,8 @@ public class User {
     @Email                                                  // waliduje adres emial
     @NotBlank                                               //@NotNull + @NotEmpty = @NotBlank
     private String email;
-    @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$")
-//    @Min(value = 6)
+//    @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$", message = "xxx")
+    @Min(value = 6)
     @Size(min = 6, max = 255)
     private String password;
 //    @DateTimeFormat(pattern = "YYYY-mm-dd HH:MM:SS")
@@ -40,7 +40,7 @@ public class User {
         this.roles.add(permission);
     }
 
-    public User(@Email @NotBlank String email, @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$") @Size(min = 6, max = 255) String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
