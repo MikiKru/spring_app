@@ -6,6 +6,7 @@ import net.atos.spring_webapp.model.enums.Category;
 import net.atos.spring_webapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,8 @@ public class PostController {
         this.postService = postService;
     }
     @GetMapping("/")
-    public String allPosts(Model model){
+    public String allPosts(Model model, Authentication authentication){
+
         model.addAttribute("user", new User("X","X"));
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
         // obiekt pusty do formularza dodającego nowego posta

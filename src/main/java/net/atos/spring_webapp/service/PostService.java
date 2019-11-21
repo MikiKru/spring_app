@@ -5,6 +5,8 @@ import net.atos.spring_webapp.repository.PostRepository;
 import net.atos.spring_webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,13 @@ public class PostService {
     public void addNewPost(long userId, Post post){
         post.setAuthor(userRepository.findById(userId).get());
         postRepository.save(post);
+    }
+    public String isAuthenticated(Authentication auth){
+        if(auth != null){
+            UserDetails credentals = (UserDetails) auth.getPrincipal();
+            return credentals.getUsername();
+        }
+        return "not logged";
     }
 
 }

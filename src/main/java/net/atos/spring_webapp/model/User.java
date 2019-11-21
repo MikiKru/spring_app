@@ -26,8 +26,8 @@ public class User {
     @NotBlank                                               //@NotNull + @NotEmpty = @NotBlank
     private String email;
 //    @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$", message = "xxx")
-    @Min(value = 6)
-    @Size(min = 6, max = 255)
+//    @Min(value = 6)
+//    @Size(min = 6, max = 255)
     private String password;
 //    @DateTimeFormat(pattern = "YYYY-mm-dd HH:MM:SS")
     private LocalDateTime registerDate = LocalDateTime.now();
