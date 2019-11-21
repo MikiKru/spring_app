@@ -1,6 +1,8 @@
 package net.atos.spring_webapp.controller;
 
+import net.atos.spring_webapp.model.Post;
 import net.atos.spring_webapp.model.User;
+import net.atos.spring_webapp.model.enums.Category;
 import net.atos.spring_webapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,6 +22,9 @@ public class PostController {
     public String allPosts(Model model){
         model.addAttribute("user", new User("X","X"));
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
+        // obiekt pusty do formularza dodającego nowego posta
+        model.addAttribute("newpost", new Post());
+        model.addAttribute("categories", Category.values());
         return "index";     // -> nazwa widoku html
     }
     @GetMapping("/post&{post_id}")

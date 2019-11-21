@@ -83,15 +83,6 @@
 
   <hr>
 
-  <form th:action="@{/addpost}" th:method="post" th:object="${newpost}">
-    <input th:type="text" th:field="*{title}" placeholder="input title">
-    <textarea th:type="text" th:field="*{content}" placeholder="input content"></textarea>
-    <select th:field="*{category}" th:each="category : ${categories}">
-        <option th:text="${category}"></option>
-    </select>
-    <input th:type="submit" th:value="add">
-  </form>
-
   <!-- Footer -->
   <footer>
     <div class="container">

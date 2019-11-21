@@ -89,6 +89,22 @@
         <!--<div class="clearfix">-->
           <!--<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>-->
         <!--</div>-->
+  <div class="container">
+    <div  class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+  <form th:action="@{/addpost}" th:method="post" th:object="${newpost}">
+    <div class="form-group">
+      <input class="form-control" th:type="text" th:field="*{title}" placeholder="input title">
+    <textarea class="form-control-plaintext" th:type="text" th:field="*{content}" placeholder="input content"></textarea>
+    <select class="form-control" th:field="*{category}">
+      <option th:each="c : ${categories}" th:text="${c}" th:value="${c}"></option>
+    </select>
+    <input class="form-control" th:type="submit" th:value="add">
+    </div>
+  </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
