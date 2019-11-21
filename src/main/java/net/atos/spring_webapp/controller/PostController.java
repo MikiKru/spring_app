@@ -19,6 +19,6 @@ public class PostController {
     public String allPosts(Model model){
         model.addAttribute("user", new User("X","X"));
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
-        return "posts";     // -> nazwa widoku html
+        return "index";     // -> nazwa widoku html
     }
 }
