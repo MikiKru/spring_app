@@ -25,8 +25,8 @@ public class PostController {
         this.postService = postService;
     }
     @GetMapping("/")
-    public String allPosts(Model model, Authentication authentication){
-
+    public String allPosts(Model model, Authentication auth){
+        model.addAttribute("isAuth",postService.isAuthenticated(auth));
         model.addAttribute("user", new User("X","X"));
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
         // obiekt pusty do formularza dodającego nowego posta
