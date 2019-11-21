@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PostController {
@@ -21,5 +22,9 @@ public class PostController {
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
         return "index";     // -> nazwa widoku html
     }
-
+    @GetMapping("/post&{post_id}")
+    public String getPostById(@PathVariable("post_id") long postId, Model model){
+        model.addAttribute("post",postService.getPostbyId(postId));
+        return "post";
+    }
 }
