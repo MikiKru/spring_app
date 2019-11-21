@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PostService {
     private PostRepository postRepository;
@@ -15,6 +17,14 @@ public class PostService {
     }
     public List<Post> getAllPostsOrdered(Sort.Direction direction){
         return postRepository.findAll(Sort.by(direction,"addedDate"));
+    }
+    public Post getPostbyId(long postId){
+        Post post = null;
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if(postOptional.isPresent()){
+            post = postOptional.get();
+        }
+        return post;
     }
 
 }

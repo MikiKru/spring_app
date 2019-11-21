@@ -21,4 +21,5 @@ public class PostController {
         model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
         return "index";     // -> nazwa widoku html
     }
+
 }
