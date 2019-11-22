@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -35,5 +36,10 @@ public class UserController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/user")
+    public Principal loggedUser(Principal principal){
+        return principal;
     }
 }

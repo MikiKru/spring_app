@@ -1,6 +1,7 @@
 package net.atos.spring_webapp.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 import java.security.Principal;
 
+//@EnableOAuth2Sso
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/login_error")      // adres przekierowania po błędynym logowaniu
                     .defaultSuccessUrl("/")                 // adres przekierowania po poprawnym logowaniu
                 .and()
+//                .oauth2Login()
+//                .and()
                     .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
