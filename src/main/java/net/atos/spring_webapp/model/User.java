@@ -53,7 +53,10 @@ public class User {
     )
     private Set<Permission> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "receiver")

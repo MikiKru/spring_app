@@ -28,7 +28,10 @@ public class Post {
 
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    )
     @JoinColumn(name = "user_id")
     private User author;
 
