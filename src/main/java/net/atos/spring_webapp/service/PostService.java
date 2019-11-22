@@ -36,9 +36,13 @@ public class PostService {
         }
         return post;
     }
-    public void addNewPost(long userId, Post post){
-        post.setAuthor(userRepository.findById(userId).get());
-        postRepository.save(post);
+    public void addNewPost(Post post, Authentication auth){
+        if(auth != null) {
+            UserDetails credentals = (UserDetails) auth.getPrincipal();
+            String email = credentals.getUsername();
+            post.setAuthor(userRepository.findFirstByEmail(email));
+            postRepository.save(post);
+        }
     }
     public String isAuthenticated(Authentication auth){
         if(auth != null){
@@ -60,7 +64,7 @@ public class PostService {
             }
         }
         return isAdmin;
-
     }
+
 
 }

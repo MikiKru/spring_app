@@ -26,7 +26,8 @@
             author & date
           </p>
         </div>
-        <div class="clearfix" th:if="${!isAuth.equals('not logged') && isAdmin}">
+        <div class="clearfix"
+             th:if="${!isAuth.equals('not logged') && (isAdmin || post.getAuthor().getEmail().equals(isAuth))}">
         <form th:action="@{'/post/delete/' + ${post.getPostId()}}" th:method="delete"  >
           <input type="button" value="delete" class="btn btn-primary float-right">
         </form>
@@ -36,7 +37,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div th:if="${!isAuth.equals('not logged')}" class="container">
     <div  class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
   <form th:action="@{/addpost}" th:method="post" th:object="${newpost}">

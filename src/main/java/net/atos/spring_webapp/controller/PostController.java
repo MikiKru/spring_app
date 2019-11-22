@@ -44,13 +44,14 @@ public class PostController {
     public String addnewPost(
             @ModelAttribute("newpost") @Valid Post newpost,
             BindingResult bindingResult,
-            Model model){
+            Model model,
+            Authentication auth){
         if(bindingResult.hasErrors()){
             model.addAttribute("posts", postService.getAllPostsOrdered(Sort.Direction.DESC));
             model.addAttribute("categories", Category.values());
             return "index";
         }
-        postService.addNewPost(1, newpost);
+        postService.addNewPost(newpost, auth);
         return "redirect:/";
     }
 }
