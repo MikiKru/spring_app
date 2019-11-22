@@ -10,7 +10,11 @@
 
 <!-- Page Header -->
 
-<header th:replace="fragments/header :: header(title='${user.getTitle()}',subtitle='Atos Blog')"></header>
+<header
+        th:replace="fragments/header :: header(title=${post.getTitle()},subtitle=${post.getCategory()})"
+>
+
+</header>
 
 
   <!-- Post Content -->
