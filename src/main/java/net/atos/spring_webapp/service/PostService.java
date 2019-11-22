@@ -68,6 +68,16 @@ public class PostService {
     public void deletePostById(long postId){
         postRepository.deleteById(postId);
     }
-
+    public void editPostById(Post post){
+        System.out.println(post);
+        Post editedPost = getPostbyId(post.getPostId());
+        System.out.println("Post z forma: " + post.hashCode());
+        System.out.println("Post z bazy: " + editedPost.hashCode());
+        editedPost.setTitle(post.getTitle());
+        editedPost.setContent(post.getContent());
+        editedPost.setCategory(post.getCategory());
+        // modyfikacja istniejącego obiektu pobranego z DB
+        postRepository.save(editedPost);
+    }
 
 }

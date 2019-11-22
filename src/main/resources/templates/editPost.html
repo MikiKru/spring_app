@@ -11,7 +11,7 @@
 <!-- Page Header -->
 
 <header
-        th:replace="fragments/header :: header(title='Post modification',subtitle='You can modify post fields'})"
+        th:replace="fragments/header :: header(title='Post modification',subtitle='You can modify post fields')"
 >
 
 </header>
@@ -23,6 +23,7 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       <form th:action="@{/editpost}" th:method="put" th:object="${post}">
         <div class="form-group">
+          <input th:type="hidden" th:field="*{postId}">
           <input class="form-control" th:type="text" th:field="*{title}" placeholder="input title">
           <p th:errors="*{title}"></p>
           <textarea class="form-control-plaintext" th:type="text" th:field="*{content}" placeholder="input content"></textarea>

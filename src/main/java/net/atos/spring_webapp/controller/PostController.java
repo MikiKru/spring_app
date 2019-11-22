@@ -64,4 +64,19 @@ public class PostController {
         postService.deletePostById(postId);
         return "redirect:/";
     }
+    @GetMapping("/post&edit&{post_id}")
+    public String editPost(@PathVariable("post_id") long postId, Model model){
+        model.addAttribute("post", postService.getPostbyId(postId));
+        model.addAttribute("categories", Category.values());
+        return "editPost";
+    }
+    @PostMapping("/editpost")
+    public String editPostById(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "editPost";
+        }
+        postService.editPostById(post);
+        return "redirect:/";
+    }
+
 }
