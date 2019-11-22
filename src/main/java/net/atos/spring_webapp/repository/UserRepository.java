@@ -55,13 +55,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Override
     <S extends User> List<S> saveAll(Iterable<S> iterable);
 
-    //    @Transactional(
-//            rollbackFor = Exception.class,
-//            noRollbackFor = {},
-//            readOnly = false
-//    )
-//
-//    void addManyUsers(List<User> users);
-
-
+    User findFirstByEmail(String email);
 }
