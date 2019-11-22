@@ -36,11 +36,11 @@ public class UserController {
         }
         userService.registerUser(user); // automatycznie przypisujemy w metodzie uprawnienia ROLE_USER
         // wysłanie maila
-        autoMailingService.sendEmail(
-                user.getEmail(),
-                "Example",
-                "Example"
-        );
+//        autoMailingService.sendEmail(
+//                user.getEmail(),
+//                "Example",
+//                "Example"
+//        );
         return "redirect:/login";
     }
     @GetMapping("/login")

@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 import java.security.Principal;
 
-//@EnableOAuth2Sso
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -57,8 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/login_error")      // adres przekierowania po błędynym logowaniu
                     .defaultSuccessUrl("/")                 // adres przekierowania po poprawnym logowaniu
                 .and()
-//                .oauth2Login()
-//                .and()
                     .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
