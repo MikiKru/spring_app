@@ -4,8 +4,10 @@ import net.atos.spring_webapp.model.User;
 import net.atos.spring_webapp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -89,29 +91,22 @@ public class AppStarter implements CommandLineRunner {
 
     @Transactional(
             rollbackFor = {Exception.class},
-            readOnly = false
+            readOnly = false,
+            propagation = Propagation.REQUIRED
     )
     public void addManyUsers(List<User> users) throws Exception {
-        for (User user : users) {
-            userRepository.save(user);
-            if(user.getEmail().equals("x2@x.pl")){
-                System.out.println("ROLLBACK");
-                throw new Exception();
-            }
-            System.out.println("Próba zapisu...");
-        }
+        userRepository.findAll((Pageable) users);
     }
 
     @Override
     public void run(String... args)  {
         List<User> users = new ArrayList<User>(
                 Arrays.asList(
-                        new User("x1@x.pl","Xxxx111_"),
-                        new User("x2@x.pl","Xxxx111_"),
-                        new User("x3@x.pl","Xxxx111_"),
-                        new User("x4@x.pl","Xxxx111_"),
-                        new User("x5@x.pl","Xxxx111_"),
-                        new User("x6@x.pl","Xxxx111_")
+                        new User("y1@x.pl","Xxxx111_"),
+                        new User("y2@x.pl","Xxxx111_"),
+                        new User("y3@x.pl","Xxxx111_"),
+                        new User("y4@x.pl","Xxxx111_"),
+                        new User("y4@x.pl","Xxxx111_")
         ));
         try {
             addManyUsers(users);

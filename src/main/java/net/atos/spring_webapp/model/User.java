@@ -25,7 +25,7 @@ public class User {
     @Email                                                  // waliduje adres emial
     @NotBlank                                               //@NotNull + @NotEmpty = @NotBlank
     private String email;
-//    @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$", message = "xxx")
+    @Pattern(regexp = "^[A-Za-z0-9-_.]+[^#]$", message = "xxx")
 //    @Min(value = 6)
 //    @Size(min = 6, max = 255)
     private String password;

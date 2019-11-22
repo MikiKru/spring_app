@@ -47,11 +47,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByEnable(boolean enable);
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     User save(User user);
 
-//    @Transactional(
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    <S extends User> List<S> saveAll(Iterable<S> iterable);
+
+    //    @Transactional(
 //            rollbackFor = Exception.class,
 //            noRollbackFor = {},
 //            readOnly = false
