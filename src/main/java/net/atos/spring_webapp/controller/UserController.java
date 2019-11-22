@@ -1,6 +1,7 @@
 package net.atos.spring_webapp.controller;
 
 import net.atos.spring_webapp.model.User;
+import net.atos.spring_webapp.service.AutoMailingService;
 import net.atos.spring_webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ import java.security.Principal;
 @Controller
 public class UserController {
     private UserService userService;
+    private AutoMailingService autoMailingService;
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AutoMailingService autoMailingService) {
         this.userService = userService;
+        this.autoMailingService = autoMailingService;
     }
     @GetMapping("/register")
     public String registerUser(Model model){
@@ -32,6 +35,12 @@ public class UserController {
             return "register";
         }
         userService.registerUser(user); // automatycznie przypisujemy w metodzie uprawnienia ROLE_USER
+        // wysłanie maila
+        autoMailingService.sendEmail(
+                user.getEmail(),
+                "Example",
+                "Example"
+        );
         return "redirect:/login";
     }
     @GetMapping("/login")
