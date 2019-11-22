@@ -28,8 +28,8 @@
         </div>
         <div class="clearfix"
              th:if="${!isAuth.equals('not logged') && (isAdmin || post.getAuthor().getEmail().equals(isAuth))}">
-        <form th:action="@{'/post/delete/' + ${post.getPostId()}}" th:method="delete"  >
-          <input type="button" value="delete" class="btn btn-primary float-right">
+        <form th:action="@{'/post/delete/' + ${post.getPostId()}}" th:method="get"  >
+          <input type="submit" value="delete" class="btn btn-primary float-right">
         </form>
         </div>
         <hr>

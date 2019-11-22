@@ -10,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -52,6 +49,12 @@ public class PostController {
             return "index";
         }
         postService.addNewPost(newpost, auth);
+        return "redirect:/";
+    }
+    @GetMapping("/post/delete/{post_id}")
+    public String deletePost(
+            @PathVariable("post_id") long postId){
+        postService.deletePostById(postId);
         return "redirect:/";
     }
 }

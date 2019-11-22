@@ -65,6 +65,9 @@ public class PostService {
         }
         return isAdmin;
     }
+    public void deletePostById(long postId){
+        postRepository.deleteById(postId);
+    }
 
 
 }
