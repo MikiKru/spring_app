@@ -44,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // żądania autoryzowane określoną rolą
                 .antMatchers("/post&*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers("/post/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/post&edit&*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/editpost").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 // pozostałe nie są autoryzowane
                 .anyRequest().permitAll()
                 .and().csrf().disable()
